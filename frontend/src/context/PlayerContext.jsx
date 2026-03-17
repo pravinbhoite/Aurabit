@@ -39,7 +39,7 @@ export const PlayerProvider = ({ children }) => {
 
   const playSong = useCallback(
   (song, songQueue = []) => {
-    const src = `http://localhost:5000/api/songs/stream/${song._id}`;
+    const src = `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/songs/stream/${song._id}`;
 
     audio.src = src;
     audio.load();
@@ -59,7 +59,7 @@ export const PlayerProvider = ({ children }) => {
     // Fire-and-forget: record play count on backend
     const token = localStorage.getItem('aurabeat_token');
     if (token) {
-      fetch(`http://localhost:5000/api/songs/${song._id}/play`, {
+      fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/songs/${song._id}/play`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       }).catch(() => {}); // silent — never affects playback

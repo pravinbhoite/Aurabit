@@ -52,7 +52,7 @@ const RoomPlayer = () => {
   };
 
   const coverSrc = currentSong?.coverImage?.startsWith('/uploads')
-    ? `http://localhost:5000${currentSong.coverImage}`
+    ? `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}${currentSong.coverImage}`
     : currentSong?.coverImage;
 
   return (

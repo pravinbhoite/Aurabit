@@ -64,7 +64,7 @@ const Player = () => {
             <img
               className="player-cover"
               src={currentSong.coverImage?.startsWith('/uploads')
-                ? `http://localhost:5000${currentSong.coverImage}`
+                ? `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}${currentSong.coverImage}`
                 : currentSong.coverImage || '/default-cover.png'}
               alt={currentSong.title}
               onError={(e) => { e.target.style.display = 'none'; }}

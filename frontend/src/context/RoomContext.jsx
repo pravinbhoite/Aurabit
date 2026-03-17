@@ -4,7 +4,7 @@ import { usePlayer } from './PlayerContext';
 
 const RoomContext = createContext(null);
 
-const SOCKET_URL = 'http://localhost:5000';
+const SOCKET_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 export const RoomProvider = ({ children }) => {
   const { playSong, seek, togglePlay, currentSong, isPlaying } = usePlayer();

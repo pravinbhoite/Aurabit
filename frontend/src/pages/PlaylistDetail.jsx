@@ -141,7 +141,7 @@ const PlaylistDetail = () => {
           {playlist.songs.map((song, idx) => {
             const isCurrentSong = currentSong?._id === song._id;
             const coverSrc = song.coverImage?.startsWith('/uploads')
-              ? `http://localhost:5000${song.coverImage}`
+              ? `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}${song.coverImage}`
               : song.coverImage;
 
             return (

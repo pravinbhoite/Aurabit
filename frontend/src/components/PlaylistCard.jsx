@@ -22,7 +22,7 @@ const PlaylistCard = ({ playlist, onClick }) => {
   };
 
   const coverSrc = playlist.coverImage?.startsWith('/uploads')
-    ? `http://localhost:5000${playlist.coverImage}`
+    ? `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}${playlist.coverImage}`
     : playlist.coverImage;
 
   return (

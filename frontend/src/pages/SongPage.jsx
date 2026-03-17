@@ -58,7 +58,7 @@ const SongPage = () => {
   );
 
   const coverSrc = song.coverImage?.startsWith('/uploads')
-    ? `http://localhost:5000${song.coverImage}`
+    ? `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}${song.coverImage}`
     : song.coverImage;
 
   return (
