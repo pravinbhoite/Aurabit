@@ -1,0 +1,8 @@
+node_modules/
+uploads/*.mp3
+uploads/*.wav
+uploads/*.ogg
+uploads/*.flac
+uploads/*.aac
+uploads/*.m4a
+.env
