@@ -22,7 +22,6 @@ const io = new Server(httpServer, {
 require('./sockets/rooms')(io);
 
 // ─── Middleware ────────────────────────────────────────────────────────────────
-const cors = require("cors");
 
 app.use(cors({
   origin: [
