@@ -1,30 +1,35 @@
 require('dotenv').config();
 const express = require('express');
-const http    = require('http');
-const cors    = require('cors');
-const path    = require('path');
+const http = require('http');
+const cors = require('cors');
+const path = require('path');
 const { Server } = require('socket.io');
-const connectDB   = require('./config/db');
+const connectDB = require('./config/db');
 
 // Connect to MongoDB
 connectDB();
 
-const app        = express();
+const app = express();
 const httpServer = http.createServer(app);
 
 // ─── Socket.io ────────────────────────────────────────────────────────────────
 const io = new Server(httpServer, {
   cors: {
-    origin:      process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: process.env.CLIENT_URL || 'http://localhost:5173',
     credentials: true,
   },
 });
 require('./sockets/rooms')(io);
 
 // ─── Middleware ────────────────────────────────────────────────────────────────
+const cors = require("cors");
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true,
+  origin: [
+    "http://localhost:5173",
+    "https://aurabit-one.vercel.app"
+  ],
+  credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,13 +38,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
-app.use('/api/auth',            require('./routes/auth'));
-app.use('/api/songs',           require('./routes/songs'));
-app.use('/api/playlists',       require('./routes/playlists'));
-app.use('/api/search',          require('./routes/search'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/songs', require('./routes/songs'));
+app.use('/api/playlists', require('./routes/playlists'));
+app.use('/api/search', require('./routes/search'));
 app.use('/api/recommendations', require('./routes/recommendations'));
-app.use('/api/users',           require('./routes/users'));
-app.use('/api/admin',           require('./routes/admin'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/admin', require('./routes/admin'));
 
 // ─── Health Check ─────────────────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
